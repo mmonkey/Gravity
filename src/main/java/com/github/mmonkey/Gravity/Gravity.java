@@ -3,10 +3,10 @@ package com.github.mmonkey.Gravity;
 import com.github.mmonkey.Gravity.Configs.DefaultConfig;
 import com.github.mmonkey.Gravity.Services.GravityService;
 import com.google.common.base.Optional;
-import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.event.Subscribe;
 import org.spongepowered.api.event.state.InitializationEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -77,7 +77,11 @@ public class Gravity {
 
     @Subscribe
     public void onInit(InitializationEvent event) {
+
         this.gravityService = new GravityService(this);
         this.gravityService.setGravity();
+
     }
+
+    public Gravity() {}
 }

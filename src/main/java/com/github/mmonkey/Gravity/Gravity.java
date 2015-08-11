@@ -1,6 +1,7 @@
 package com.github.mmonkey.Gravity;
 
 import com.github.mmonkey.Gravity.Configs.DefaultConfig;
+import com.github.mmonkey.Gravity.Services.GravityService;
 import com.google.common.base.Optional;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.Inject;
@@ -27,6 +28,7 @@ public class Gravity {
     private Optional<PluginContainer> pluginContainer;
     private static Logger logger;
     private DefaultConfig defaultConfig;
+    private GravityService gravityService;
 
     @Inject
     @ConfigDir(sharedRoot = false)
@@ -46,6 +48,10 @@ public class Gravity {
 
     public DefaultConfig getDefaultConfig() {
         return this.defaultConfig;
+    }
+
+    public GravityService getGravityService() {
+        return this.gravityService;
     }
 
     @Subscribe
@@ -71,6 +77,7 @@ public class Gravity {
 
     @Subscribe
     public void onInit(InitializationEvent event) {
-
+        this.gravityService = new GravityService(this);
+        this.gravityService.setGravity();
     }
 }
